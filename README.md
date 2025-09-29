@@ -1,0 +1,1 @@
+Whatever random ideas I feel like coding - I am no expert at coding whatsoever, I find it fun to make my silly ideas.
