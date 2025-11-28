@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 from time import perf_counter
+from pathlib import Path
 
 #Generates a x by x grid based on sidelength input.
 def GenerateGrid(sideLength):
@@ -22,7 +23,7 @@ def CircleOverlay(grid, sideLength):
         for xCoord in range(0,len(grid)):
 
             #If the grid coordinate is within the tolerance of the radius, change the grid value from 0 to 255
-            if (yCoord-radius)**2 + (xCoord-radius)**2 == (radius)**2 :
+            if (yCoord-radius)**2 - tolerance + (xCoord-radius)**2 - tolerance >= (radius)**2 or (yCoord-radius)**2 + tolerance + (xCoord-radius)**2 + tolerance <= (radius)**2:
                 grid[yCoord][xCoord] = 255
     return grid
 
@@ -30,7 +31,7 @@ def CircleOverlay(grid, sideLength):
 def CircleFormat(circle):
     array = np.array(circle, dtype=np.uint8)
     newImage = Image.fromarray(array)
-    newImage.save('minecraftCircleCalc/testImage.png')
+    newImage.save(Path(__file__).parent.joinpath("testImage.png"))
 
 
 #User input
