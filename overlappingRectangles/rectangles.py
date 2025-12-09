@@ -17,10 +17,10 @@ class Rectangle:
         #Trig calculations to find direction of line after rotation
         xAfterRotation = [self.sideX * np.cos(self.angle), -self.sideX * np.sin(self.angle)]
         yAfterRotation = [self.sideY * np.sin(self.angle), self.sideY * np.cos(self.angle)]
-        xlimit = np.floor(np.abs(yAfterRotation[0]) + np.abs(xAfterRotation[0]))
+        xlimit = int(np.floor(np.abs(yAfterRotation[0]) + np.abs(xAfterRotation[0])))
 
         #Finding where to place one corner so that the rectangle is not drawn outside of the scene
-        self.centre = [random.randint(5, gridSide - xlimit), random.randint(max(0, 4-np.ceil(xAfterRotation[1])), min(gridSide, gridSide - np.floor(yAfterRotation[1])))]
+        self.centre = [random.randint(5, gridSide - xlimit), random.randint(max(0, 4-int(np.ceil(xAfterRotation[1]))), min(gridSide, gridSide - int(np.floor(yAfterRotation[1]))))]
         self.points = [self.centre,
                        [self.centre[0] + xAfterRotation[0], self.centre[1] + xAfterRotation[1]],
                        [self.centre[0] + xAfterRotation[0] + yAfterRotation[0], self.centre[1] + xAfterRotation[1] + yAfterRotation[1]],
@@ -63,7 +63,7 @@ GRIDSIZE = 800
 RECTNUM = 2
 
 #This allows for a maximum sized square where the sides are 1/sqrt(2) of the screen length. This makes the furthest corner to corner distance == gridsize.
-MAXSIDELENGTH = np.floor(GRIDSIZE/np.sqrt(2))-5
+MAXSIDELENGTH = int(np.floor(GRIDSIZE/np.sqrt(2))-5)
 
 statsArray = []
 
