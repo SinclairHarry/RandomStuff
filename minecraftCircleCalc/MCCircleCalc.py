@@ -23,7 +23,7 @@ def CircleOverlay(grid, sideLength):
         for xCoord in range(0,len(grid)):
 
             #If the grid coordinate is within the tolerance of the radius, change the grid value from 0 to 255
-            if (yCoord-radius)**2 - tolerance + (xCoord-radius)**2 - tolerance >= (radius)**2 or (yCoord-radius)**2 + tolerance + (xCoord-radius)**2 + tolerance <= (radius)**2:
+            if (yCoord-radius)**2 - tolerance + (xCoord-radius)**2 - tolerance > (radius)**2 or (yCoord-radius)**2 + tolerance + (xCoord-radius)**2 + tolerance < (radius)**2:
                 grid[yCoord][xCoord] = 255
     return grid
 
