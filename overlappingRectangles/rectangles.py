@@ -20,7 +20,11 @@ class Rectangle:
         xlimit = int(np.floor(np.abs(yAfterRotation[0]) + np.abs(xAfterRotation[0])))
 
         #Finding where to place one corner so that the rectangle is not drawn outside of the scene
+<<<<<<< HEAD
+        self.centre = [random.randint(5, int(gridSide - xlimit)), random.randint(max(0, 4-int(np.ceil(xAfterRotation[1]))), min(gridSide, gridSide - int(np.floor(yAfterRotation[1]))))]
+=======
         self.centre = [random.randint(5, gridSide - xlimit), random.randint(max(0, 4-int(np.ceil(xAfterRotation[1]))), min(gridSide, gridSide - int(np.floor(yAfterRotation[1]))))]
+>>>>>>> e2d5b9b722633ba31a17078993433df4e9c87909
         self.points = [self.centre,
                        [self.centre[0] + xAfterRotation[0], self.centre[1] + xAfterRotation[1]],
                        [self.centre[0] + xAfterRotation[0] + yAfterRotation[0], self.centre[1] + xAfterRotation[1] + yAfterRotation[1]],
@@ -45,7 +49,7 @@ class Grid:
 
     #Creates a rectangle, prints out the randomized info, draws to grid.
     def AddRectToGrid(self, statsArray):
-        rect = Rectangle(MAXSIDELENGTH, GRIDSIZE)
+        rect = Rectangle(int(MAXSIDELENGTH), int(GRIDSIZE))
         statsArray.append(GradientSolver(rect.points))
         self.canvas.create_line(rect.points,fill=rect.colour)
         return statsArray
@@ -65,23 +69,25 @@ RECTNUM = 2
 #This allows for a maximum sized square where the sides are 1/sqrt(2) of the screen length. This makes the furthest corner to corner distance == gridsize.
 MAXSIDELENGTH = int(np.floor(GRIDSIZE/np.sqrt(2))-5)
 
-statsArray = []
+def main():
+    statsArray = []
 
-#Setup Tkinter root
-root = tk.Tk()
-grid = Grid(root)
+    #Setup Tkinter root
+    root = tk.Tk()
+    grid = Grid(root)
 
-#Rectangle spawn
-startTime = perf_counter()
-for i in range(RECTNUM):
-    grid.AddRectToGrid(statsArray)
-finTime = perf_counter()-startTime
-print(finTime)
-
-
-print(statsArray)
-
-#Start
-root.mainloop()
+    #Rectangle spawn
+    startTime = perf_counter()
+    for i in range(RECTNUM):
+        grid.AddRectToGrid(statsArray)
+    finTime = perf_counter()-startTime
+    print(finTime)
 
 
+    print(statsArray)
+
+    #Start
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
